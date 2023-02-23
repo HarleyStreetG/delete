@@ -1,24 +1,14 @@
 pipeline {
     agent any
 
-    environment{
-        DOCKER = credentials('Docker')
-    }
 
     stages {
-        stage('Build') {
+        stage('Login and Push'){
             steps {
-                sh 'docker build -t harleyguy/flaskapp .'
-            }
-        }
-        stage('Login'){
-            steps {
-                echo '$DOCKER | docker login -u harleyguy --password-stdin'
-            }
-        }
-        stage('Push'){
-            steps {
-                sh 'docker push harleyguy/flaskapp'
+                script{
+                  withDockerRegistry(credentialsId: 'Docker') {
+                    docker.build('harleyguy/flaskapp') .push('latest')
+                }
             }
         }
     }
