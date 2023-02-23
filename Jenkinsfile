@@ -11,7 +11,7 @@ pipeline {
                 sh 'docker build -t harleyguy/flaskapp .'
             }
         }
-        stagr('Login'){
+        stage('Login'){
             steps {
                 echo '$DOCKER | docker login -u harleyguy --password-stdin'
             }
