@@ -16,5 +16,10 @@ pipeline {
                 echo '$DOCKER | docker login -u harleyguy --password-stdin'
             }
         }
+        stage('Push'){
+            steps {
+                sh 'docker push harleyguy/flaskapp'
+            }
+        }
     }
 }
