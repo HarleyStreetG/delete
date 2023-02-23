@@ -8,6 +8,7 @@ pipeline {
                 script{
                   withDockerRegistry(credentialsId: 'Docker') {
                     docker.build('harleyguy/flaskapp') .push('latest')
+                    }
                 }
             }
         }
