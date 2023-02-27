@@ -22,5 +22,14 @@ pipeline {
                 }
             }
         }
+        stage('Kubernetes login'){
+            steps{
+                script{
+                    withAWS(credentials: 'AWSCredentials', region: 'us-east-1'){
+                        sh 'aws eks update-kubeconfig --region us east-1 --name VETTEC'
+                    }
+                }
+            }
+        }
     }
 }
