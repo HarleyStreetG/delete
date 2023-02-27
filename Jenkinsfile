@@ -31,5 +31,19 @@ pipeline {
                 }
             }
         }
+        stage('Create Namespace'){
+            steps {
+                script {
+                    withAWS(credentials: 'AWS_Credentials', region: 'us-east-1') {
+                        try {
+                            sh 'kubectl apply -f manifest.yaml'
+                        } catch (Exception e) {
+                            echo 'Exception occured: ' + e.toString()
+                            echo 'Handled the Exception!'
+                        }
+                    }
+                }
+            }
+        }
     }
 }
