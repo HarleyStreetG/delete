@@ -12,5 +12,15 @@ pipeline {
                 }
             }
         }
+        stage('AWS Commands'){
+            steps {
+                script {
+                    // sign into AWS
+                    withAWS(credentials: 'AWS_Credentials', region: 'us-east-1'){ 
+                        sh 'aws sts get-caller-identity'
+                    }
+                }
+            }
+        }
     }
 }
